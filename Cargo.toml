@@ -9,3 +9,7 @@ edition = "2018"
 [dependencies]
 config = "0.10.1"
 pjlink = "0.2.0"
+lazy_static = "1.4.0"
+cached = "0.18.0"
+serde = "1.0.115"
+serde_derive = "1.0.115"
