@@ -11,6 +11,9 @@ fn read_config() -> Config {
 pub struct Settings {
     pub projector_address: String,
     pub projector_password: String,
+    pub bin_day: u8,
+    pub even_week_message: String,
+    pub odd_week_message: String,
 }
 
 pub fn settings() -> Settings {
