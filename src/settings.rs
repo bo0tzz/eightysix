@@ -9,9 +9,27 @@ fn read_config() -> Config {
 
 #[derive(Deserialize)]
 pub struct Settings {
-    pub projector_address: String,
-    pub projector_password: String,
-    pub bin_day: u8,
+    pub projector: ProjectorSettings,
+    pub bins: BinSettings,
+    pub telegram: TelegramSettings,
+}
+
+#[derive(Deserialize)]
+pub struct TelegramSettings {
+    pub token: String,
+    pub home_chat: i64,
+    pub bot_name: String,
+}
+
+#[derive(Deserialize)]
+pub struct ProjectorSettings {
+    pub address: String,
+    pub password: String,
+}
+
+#[derive(Deserialize)]
+pub struct BinSettings {
+    pub day: u8,
     pub even_week_message: String,
     pub odd_week_message: String,
 }

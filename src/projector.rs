@@ -1,4 +1,4 @@
-use crate::settings::Settings;
+use crate::settings::ProjectorSettings;
 use pjlink::PowerStatus::{Off, On};
 use pjlink::{PjlinkDevice, PowerStatus};
 
@@ -10,11 +10,8 @@ pub struct Projector {
 pub struct ProjectorError {}
 
 impl Projector {
-    pub fn new(settings: &Settings) -> Result<Projector, ProjectorError> {
-        match PjlinkDevice::new_with_password(
-            &settings.projector_address,
-            &settings.projector_password,
-        ) {
+    pub fn new(settings: &ProjectorSettings) -> Result<Projector, ProjectorError> {
+        match PjlinkDevice::new_with_password(&settings.address, &settings.password) {
             Ok(link) => Ok(Projector { link }),
             Err(_) => Err(ProjectorError {}),
         }
