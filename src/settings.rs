@@ -3,7 +3,9 @@ use serde_derive::Deserialize;
 
 fn read_config() -> Config {
     let mut settings = config::Config::default();
-    settings.merge(config::File::with_name("settings")).unwrap();
+    settings
+        .merge(config::File::with_name("settings"))
+        .expect("Failed to read settings file");
     settings
 }
 
