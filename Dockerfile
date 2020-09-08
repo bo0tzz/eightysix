@@ -1,5 +1,7 @@
 FROM rust as builder
 WORKDIR /usr/src/eightysix
+COPY Cargo.* .
+RUN cargo fetch
 COPY . .
 RUN cargo install --path .
 
