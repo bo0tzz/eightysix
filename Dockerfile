@@ -7,7 +7,10 @@ WORKDIR /usr/src/eightysix
 COPY Cargo.* ./
 RUN cargo build --release
 RUN rm src/*.rs
+
 RUN rm target/x86_64-unknown-linux-musl/release/eightysix
+RUN rm target/x86_64-unknown-linux-musl/release/eightysix.d
+RUN rm -r target/x86_64-unknown-linux-musl/release/incremental
 
 ENV RUST_BACKTRACE=full
 COPY . .
