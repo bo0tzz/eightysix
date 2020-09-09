@@ -11,6 +11,7 @@ RUN rm src/*.rs
 RUN rm target/x86_64-unknown-linux-musl/release/eightysix
 RUN rm target/x86_64-unknown-linux-musl/release/eightysix.d
 RUN rm -r target/x86_64-unknown-linux-musl/release/incremental
+RUN rm -r target/x86_64-unknown-linux-musl/release/.fingerprint/eightysix*
 
 ENV RUST_BACKTRACE=full
 COPY . .
