@@ -1,4 +1,4 @@
-FROM rust as builder
+FROM clux/muslrust as builder
 WORKDIR /usr/src/
 
 # Hack to cache the dependencies
@@ -7,11 +7,13 @@ WORKDIR /usr/src/eightysix
 COPY Cargo.* ./
 RUN cargo build --release
 RUN rm src/*.rs
-RUN rm target/release/eightysix
+RUN rm target/x86_64-unknown-linux-musl/release/eightysix
 
+ENV RUST_BACKTRACE=full
 COPY . .
 RUN cargo build --release
 
-FROM alpine
-COPY --from=builder /usr/src/eightysix/target/release/eightysix /usr/local/bin/eightysix
-CMD ["eightysix"]
+FROM scratch
+COPY --from=builder /usr/src/eightysix/target/x86_64-unknown-linux-musl/release/eightysix .
+ENV RUST_BACKTRACE=full
+CMD ["./eightysix"]
