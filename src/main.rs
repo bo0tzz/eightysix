@@ -14,10 +14,10 @@ use telegram_bot::*;
 async fn main() -> Result<(), Error> {
     let config = settings::settings();
     let projector = Projector::new(&config.projector).expect("Could not connect to projector.");
-    //
+    
     let api = Api::new(config.telegram.token);
     let home_chat = telegram_bot::types::refs::ChatId::from(config.telegram.home_chat);
-    //
+    
     // let binday = BinDay::new(&config.bins, &|s: String| {
     //     let chat = telegram_bot::types::refs::ChatId::from(config.telegram.home_chat);
     //     let message = SendMessage::new(chat.to_chat_ref(), s);
