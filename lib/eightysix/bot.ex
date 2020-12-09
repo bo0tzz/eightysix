@@ -9,6 +9,7 @@ defmodule Eightysix.Bot do
   command("help", description: "Print the bot's help")
 
   middleware(ExGram.Middleware.IgnoreUsername)
+  middleware(Eightysix.Middleware.Groupfilter)
 
   def bot(), do: @bot
 

@@ -4,7 +4,9 @@ defmodule Eightysix.Application do
   @moduledoc false
 
   @config_bindings [
-    bot_token: ["bot", "token"]
+    bot_token: ["bot", "token"],
+    home_group: ["bot", "home_group"],
+
   ]
 
   use Application
@@ -21,6 +23,8 @@ defmodule Eightysix.Application do
     ]
 
     config = Vapor.load!(providers) |> IO.inspect()
+
+    Application.put_all_env([{Eightysix, Map.to_list(config)}])
 
     children = [
       ExGram,
