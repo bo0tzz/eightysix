@@ -22,6 +22,7 @@ defmodule Eightysix.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:quantum, "~> 3.0"},
       {:vapor, "~> 0.10"},
       {:ex_gram, "~> 0.15"},
       {:tesla, "~> 1.2"},

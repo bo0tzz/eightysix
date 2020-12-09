@@ -29,7 +29,8 @@ defmodule Eightysix.Application do
 
     children = [
       ExGram,
-      {Eightysix.Bot, [method: :polling, token: config.bot_token]}
+      {Eightysix.Bot, [method: :polling, token: config.bot_token]},
+      Eightysix.Scheduler,
     ]
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
