@@ -2,9 +2,9 @@ name: Push docker
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, elixir-rewrite ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, elixir-rewrite ]
 
 jobs:
   build:
