@@ -18,4 +18,7 @@ defmodule Eightysix.Bot do
   def handle({:command, :off, _msg}, context), do: answer(context, Eightysix.Projector.off())
   def handle({:command, :status, _msg}, context), do: answer(context, Eightysix.Projector.status())
 
+  def handle({:command, :add, msg}, context), do: answer(context, Eightysix.ShoppingList.add(msg))
+  def handle({:command, :get, _msg}, context), do: answer(context, Eightysix.ShoppingList.get())
+  def handle({:command, :clear, _msg}, context), do: answer(context, Eightysix.ShoppingList.clear())
 end
