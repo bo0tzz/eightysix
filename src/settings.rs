@@ -4,7 +4,7 @@ use serde_derive::Deserialize;
 fn read_config() -> Config {
     let mut settings = config::Config::default();
     settings
-        .merge(config::File::with_name("settings"))
+        .merge(config::File::with_name("/settings.toml"))
         .expect("Failed to read settings file");
     settings
 }
@@ -31,7 +31,7 @@ pub struct ProjectorSettings {
 
 #[derive(Deserialize)]
 pub struct BinSettings {
-    pub day: u8,
+    pub day: u64,
     pub even_week_message: String,
     pub odd_week_message: String,
 }

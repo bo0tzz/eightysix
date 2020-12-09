@@ -1,10 +1,9 @@
-// mod bin_day;
+mod bin_day;
 mod projector;
 mod settings;
-//
-// use crate::bin_day::{run_on_timer, BinDay};
+
+use crate::bin_day::{BinDay};
 use crate::projector::Projector;
-// use pjlink::PowerStatus;
 use futures::StreamExt;
 use pjlink::PowerStatus;
 use regex::Regex;
@@ -14,16 +13,15 @@ use telegram_bot::*;
 async fn main() -> Result<(), Error> {
     let config = settings::settings();
     let projector = Projector::new(&config.projector).expect("Could not connect to projector.");
-    
+
     let api = Api::new(config.telegram.token);
     let home_chat = telegram_bot::types::refs::ChatId::from(config.telegram.home_chat);
-    
-    // let binday = BinDay::new(&config.bins, &|s: String| {
-    //     let chat = telegram_bot::types::refs::ChatId::from(config.telegram.home_chat);
-    //     let message = SendMessage::new(chat.to_chat_ref(), s);
-    //     api.send(message);
-    // });
-    // run_on_timer(move || binday.check_bins());
+
+    let binday = BinDay::new(&config.bins, |s: String| {
+        let chat = telegram_bot::types::refs::ChatId::from(config.telegram.home_chat);
+        let message = SendMessage::new(chat.to_chat_ref(), s);
+        api.send(message);
+    });
 
     let command_regex = Regex::new(r"/(\w+)(@\w+)?").unwrap();
 
