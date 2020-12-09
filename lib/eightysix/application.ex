@@ -8,6 +8,7 @@ defmodule Eightysix.Application do
     home_group: ["bot", "home_group"],
     projector_address: ["projector", "address"],
     projector_password: ["projector", "password"],
+    shopping_storage: ["shopping", "storage"],
   ]
 
   use Application
@@ -28,6 +29,7 @@ defmodule Eightysix.Application do
     Application.put_all_env([{Eightysix, Map.to_list(config)}])
 
     children = [
+      {Eightysix.ShoppingList.Storage, [config.shopping_storage]},
       ExGram,
       {Eightysix.Bot, [method: :polling, token: config.bot_token]},
       Eightysix.Scheduler,
