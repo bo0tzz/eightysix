@@ -6,7 +6,8 @@ defmodule Eightysix.Application do
   @config_bindings [
     bot_token: ["bot", "token"],
     home_group: ["bot", "home_group"],
-
+    projector_address: ["projector", "address"],
+    projector_password: ["projector", "password"],
   ]
 
   use Application
