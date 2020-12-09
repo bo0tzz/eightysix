@@ -29,6 +29,22 @@ defmodule Eightysix.PjLink do
     end
   end
 
+  def on(projector) do
+    "POWR=" <> result = send_command(projector, "POWR 1")
+    case String.trim(result) do
+      "OK" -> {:ok, :on}
+      "ERR" <> _ -> {:fail, status?(projector)}
+    end
+  end
+
+  def off(projector) do
+    "POWR=" <> result = send_command(projector, "POWR 0")
+    case String.trim(result) do
+      "OK" -> {:ok, :off}
+      "ERR" <> _ -> {:fail, status?(projector)}
+    end
+  end
+
   defp _connect(projector) do
     {:ok, socket} = :gen_tcp.connect(projector.ip, projector.port, [:binary], 1000)
     projector = %{projector | socket: socket}

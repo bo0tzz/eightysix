@@ -23,7 +23,7 @@ defmodule Eightysix.Application do
       %Vapor.Provider.File{path: config_file, bindings: @config_bindings}
     ]
 
-    config = Vapor.load!(providers) |> IO.inspect()
+    config = Vapor.load!(providers)
 
     Application.put_all_env([{Eightysix, Map.to_list(config)}])
 
