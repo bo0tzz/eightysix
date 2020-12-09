@@ -9,6 +9,10 @@ defmodule Eightysix.Bot do
   command("on", description: "Turn the projector on")
   command("off", description: "Turn the projector off")
 
+  command("add", description: "Add an item to the shopping list")
+  command("get", description: "Get the current shopping list")
+  command("clear", description: "Clear the shopping list")
+
   middleware(ExGram.Middleware.IgnoreUsername)
   middleware(Eightysix.Middleware.Groupfilter)
 

@@ -2,3 +2,4 @@ _build/
 deps/
 mix.lock
 config.toml
+shopping
