@@ -14,25 +14,37 @@ defmodule Eightysix.Projector do
 
   def on() do
     projector = connect()
+
     case PjLink.status?(projector) do
-      :on -> "Projector is already on"
-      :warmup -> "Projector is warming up"
-      _ -> case PjLink.on(projector) do
-        {:ok, :on} -> "Turned projector on"
-        {:fail, status} -> "Failed to turn projector on, current status is #{status}"
-      end
+      :on ->
+        "Projector is already on"
+
+      :warmup ->
+        "Projector is warming up"
+
+      _ ->
+        case PjLink.on(projector) do
+          {:ok, :on} -> "Turned projector on"
+          {:fail, status} -> "Failed to turn projector on, current status is #{status}"
+        end
     end
   end
 
   def off() do
     projector = connect()
+
     case PjLink.status?(projector) do
-      :off -> "Projector is already off"
-      :cooling -> "Projector is cooling down"
-      _ -> case PjLink.off(projector) do
-        {:ok, :off} -> "Turned projector off"
-        {:fail, status} -> "Failed to turn projector off, current status is #{status}"
-      end
+      :off ->
+        "Projector is already off"
+
+      :cooling ->
+        "Projector is cooling down"
+
+      _ ->
+        case PjLink.off(projector) do
+          {:ok, :off} -> "Turned projector off"
+          {:fail, status} -> "Failed to turn projector off, current status is #{status}"
+        end
     end
   end
 

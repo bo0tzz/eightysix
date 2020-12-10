@@ -4,7 +4,8 @@ defmodule Eightysix.ShoppingList.Storage do
   alias Eightysix.ShoppingList.Storage
 
   @impl true
-  def init(path), do: {
+  def init(path),
+    do: {
       :ok,
       %Storage{
         path: path,
@@ -22,10 +23,12 @@ defmodule Eightysix.ShoppingList.Storage do
 
   @impl true
   def handle_continue(:load, %Storage{path: path} = state) do
-    :ok = case File.read(path) do
-      {:ok, binary} -> :erlang.binary_to_term(binary) |> Enum.each(&async_add/1)
-      {:error, reason} -> IO.puts("Failed to read file #{path}: #{:file.format_error(reason)}")
-    end
+    :ok =
+      case File.read(path) do
+        {:ok, binary} -> :erlang.binary_to_term(binary) |> Enum.each(&async_add/1)
+        {:error, reason} -> IO.puts("Failed to read file #{path}: #{:file.format_error(reason)}")
+      end
+
     {:noreply, state}
   end
 
@@ -37,6 +40,7 @@ defmodule Eightysix.ShoppingList.Storage do
 
   def save(path, items) do
     data = :erlang.term_to_binary(items)
+
     case File.write(path, data) do
       :ok -> :ok
       {:error, reason} -> IO.puts("Failed to write file #{path}: #{:file.format_error(reason)}")
@@ -44,14 +48,16 @@ defmodule Eightysix.ShoppingList.Storage do
   end
 
   @impl true
-  def handle_cast({:add, item}, %Storage{items: items} = state), do: {
+  def handle_cast({:add, item}, %Storage{items: items} = state),
+    do: {
       :noreply,
       %{state | items: [item | items]},
       {:continue, :save}
     }
 
   @impl true
-  def handle_call({:add, item}, _, %Storage{items: items} = state), do: {
+  def handle_call({:add, item}, _, %Storage{items: items} = state),
+    do: {
       :reply,
       :ok,
       %{state | items: [item | items]},
@@ -59,19 +65,21 @@ defmodule Eightysix.ShoppingList.Storage do
     }
 
   @impl true
-  def handle_call({:get}, _, %Storage{items: items} = state), do: {
-    :reply,
-    {:ok, items},
-    state
-  }
+  def handle_call({:get}, _, %Storage{items: items} = state),
+    do: {
+      :reply,
+      {:ok, items},
+      state
+    }
 
   @impl true
-  def handle_call({:clear}, _, state), do: {
-    :reply,
-    :ok,
-    %{state | items: []},
-    {:continue, :save}
-  }
+  def handle_call({:clear}, _, state),
+    do: {
+      :reply,
+      :ok,
+      %{state | items: []},
+      {:continue, :save}
+    }
 
   def async_add(item) do
     GenServer.cast(__MODULE__, {:add, item})

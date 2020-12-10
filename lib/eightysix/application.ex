@@ -8,17 +8,18 @@ defmodule Eightysix.Application do
     home_group: ["bot", "home_group"],
     projector_address: ["projector", "address"],
     projector_password: ["projector", "password"],
-    shopping_storage: ["shopping", "storage"],
+    shopping_storage: ["shopping", "storage"]
   ]
 
   use Application
 
   @impl true
   def start(_type, _args) do
-    config_file = case System.fetch_env("EIGHTYSIX_CONFIG_FILE") do
-      :error -> "config.toml"
-      {:ok, value} -> value
-    end
+    config_file =
+      case System.fetch_env("EIGHTYSIX_CONFIG_FILE") do
+        :error -> "config.toml"
+        {:ok, value} -> value
+      end
 
     providers = [
       %Vapor.Provider.File{path: config_file, bindings: @config_bindings}
@@ -32,8 +33,9 @@ defmodule Eightysix.Application do
       {Eightysix.ShoppingList.Storage, [config.shopping_storage]},
       ExGram,
       {Eightysix.Bot, [method: :polling, token: config.bot_token]},
-      Eightysix.Scheduler,
+      Eightysix.Scheduler
     ]
+
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Eightysix.Supervisor]

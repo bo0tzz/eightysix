@@ -11,7 +11,9 @@ defmodule Eightysix.Scheduler do
           "Can someone please take the black bin out?",
           token: Application.fetch_env!(Eightysix, :bot_token)
         )
-      _ -> nil
+
+      _ ->
+        nil
     end
   end
 end
