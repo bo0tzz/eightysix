@@ -2,8 +2,11 @@ defmodule Eightysix.ShoppingList do
   alias Eightysix.ShoppingList.Storage
   def add(%{text: text}) do
     item = String.replace(text, "/add ", "")
-    :ok = Storage.add(item)
-    "#{item} was added to the shopping list."
+    case String.trim(item) do
+      "" -> "Please specify something to add, for example: /add rice"
+      trimmed -> :ok = Storage.add(trimmed)
+           "#{trimmed} was added to the shopping list."
+    end
   end
 
   def get() do
