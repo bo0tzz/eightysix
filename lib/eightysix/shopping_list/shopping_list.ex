@@ -4,11 +4,13 @@ defmodule Eightysix.ShoppingList do
   def add(%{text: msg}) do
     case sanitize(msg) do
       "" ->
-        "Please specify something to add, for example: /add rice.
+        """
+        Please specify something to add, for example: /add rice.
         You can also add multiple things by separating them with a new line, for example:
         /add rice
         beans
-        milk"
+        milk
+        """
 
       items ->
         String.split(items, "\n") |> add()
