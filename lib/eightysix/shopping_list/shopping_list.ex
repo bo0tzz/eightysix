@@ -27,7 +27,7 @@ defmodule Eightysix.ShoppingList do
     "Added items to the shopping list."
   end
 
-  def remove(msg) do
+  def remove(%{text: msg}) do
     item = sanitize(msg)
     :ok = Storage.remove(item)
     "#{item} was removed from the shopping list."
