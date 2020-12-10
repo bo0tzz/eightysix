@@ -10,6 +10,7 @@ defmodule Eightysix.Bot do
   command("off", description: "Turn the projector off")
 
   command("add", description: "Add an item to the shopping list")
+  command("remove", description: "Remove an item from the shopping list")
   command("get", description: "Get the current shopping list")
   command("clear", description: "Clear the shopping list")
 
@@ -25,6 +26,10 @@ defmodule Eightysix.Bot do
     do: answer(context, Eightysix.Projector.status())
 
   def handle({:command, :add, msg}, context), do: answer(context, Eightysix.ShoppingList.add(msg))
+
+  def handle({:command, :remove, msg}, context),
+    do: answer(context, Eightysix.ShoppingList.remove(msg))
+
   def handle({:command, :get, _msg}, context), do: answer(context, Eightysix.ShoppingList.get())
 
   def handle({:command, :clear, _msg}, context),

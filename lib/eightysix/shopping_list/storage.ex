@@ -65,6 +65,15 @@ defmodule Eightysix.ShoppingList.Storage do
     }
 
   @impl true
+  def handle_call({:remove, item}, _, %Storage{items: items} = state),
+    do: {
+      :reply,
+      :ok,
+      %{state | items: List.delete(items, item)},
+      {:continue, :save}
+    }
+
+  @impl true
   def handle_call({:get}, _, %Storage{items: items} = state),
     do: {
       :reply,
@@ -87,6 +96,10 @@ defmodule Eightysix.ShoppingList.Storage do
 
   def add(item) do
     GenServer.call(__MODULE__, {:add, item})
+  end
+
+  def remove(item) do
+    GenServer.call(__MODULE__, {:remove, item})
   end
 
   def get() do
