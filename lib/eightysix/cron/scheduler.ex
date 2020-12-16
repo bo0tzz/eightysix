@@ -1,5 +1,5 @@
 defmodule Eightysix.Scheduler do
-  use Quantum, otp_app: Eightysix
+  use Quantum, otp_app: :eightysix
 
   def send_bins_reminder() do
     {_, week_num} = :calendar.iso_week_number()
