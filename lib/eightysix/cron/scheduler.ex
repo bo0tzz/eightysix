@@ -3,11 +3,11 @@ defmodule Eightysix.Scheduler do
   require Logger
 
   def send_bins_reminder() do
-    Logger.info("Running bins reminder handler")
     {_, week_num} = :calendar.iso_week_number()
+    Logger.info("Running bins reminder handler on week #{week_num}")
 
     case rem(week_num, 2) do
-      1 ->
+      0 ->
         Logger.info("Sending reminder")
         ExGram.send_message(
           Application.fetch_env!(Eightysix, :home_group),
