@@ -8,7 +8,8 @@ defmodule Eightysix.Application do
     home_group: ["bot", "home_group"],
     projector_address: ["projector", "address"],
     projector_password: ["projector", "password"],
-    shopping_storage: ["shopping", "storage"]
+    shopping_storage: ["shopping", "storage"],
+    coffee_address: ["coffee", "address"],
   ]
 
   use Application

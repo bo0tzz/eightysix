@@ -5,14 +5,17 @@ defmodule Eightysix.Bot do
     name: @bot,
     setup_commands: true
 
+  command("add", description: "Add an item to the shopping list")
+  command("coffee", description: "Turn the coffee machine on or off")
+
+  command("get", description: "Get the current shopping list")
+  command("clear", description: "Clear the shopping list")
+
+  command("remove", description: "Remove an item from the shopping list")
+
   command("status", description: "Get the projector status")
   command("on", description: "Turn the projector on")
   command("off", description: "Turn the projector off")
-
-  command("add", description: "Add an item to the shopping list")
-  command("remove", description: "Remove an item from the shopping list")
-  command("get", description: "Get the current shopping list")
-  command("clear", description: "Clear the shopping list")
 
   middleware(ExGram.Middleware.IgnoreUsername)
   middleware(Eightysix.Middleware.Groupfilter)
@@ -34,4 +37,12 @@ defmodule Eightysix.Bot do
 
   def handle({:command, :clear, _msg}, context),
     do: answer(context, Eightysix.ShoppingList.clear())
+
+  def handle({:command, :coffee, _msg}, context) do
+    msg = case Eightysix.Coffee.toggle() do
+      :true -> "Turned coffee on"
+      :false -> "Turned coffee off"
+    end
+    answer(context, msg)
+  end
 end

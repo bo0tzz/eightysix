@@ -14,7 +14,7 @@ defmodule Eightysix.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger],
+      extra_applications: [:logger, :httpoison],
       mod: {Eightysix.Application, []}
     ]
   end
@@ -27,7 +27,9 @@ defmodule Eightysix.MixProject do
       {:ex_gram, "~> 0.15"},
       {:tesla, "~> 1.2"},
       {:hackney, "~> 1.12"},
-      {:jason, ">= 1.0.0"}
+      {:jason, ">= 1.0.0"},
+      {:httpoison, ">= 1.6.0"},
+      {:poison, "~> 4.0"}
     ]
   end
 end
