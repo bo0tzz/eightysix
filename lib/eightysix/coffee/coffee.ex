@@ -16,7 +16,10 @@ defmodule Eightysix.Coffee do
     |> Enum.map(fn({k, v}) -> {String.to_atom(k), v} end)
   end
 
-  def toggle() do
-    Eightysix.Coffee.get!("/relay/0?turn=toggle").body[:ison]
+  def toggle(), do: turn("toggle")
+  def on(), do: turn("on")
+
+  def turn(state) do
+    Eightysix.Coffee.get!("/relay/0?turn=" <> state).body[:ison]
   end
 end

@@ -5,6 +5,8 @@ defmodule Eightysix.Bot do
     name: @bot,
     setup_commands: true
 
+  regex(~r/l(u|o)nch/i, :lunch)
+
   command("add", description: "Add an item to the shopping list")
   command("coffee", description: "Turn the coffee machine on or off")
 
@@ -44,5 +46,10 @@ defmodule Eightysix.Bot do
       :false -> "Turned coffee off"
     end
     answer(context, msg)
+  end
+
+  def handle({:regex, :lunch, _msg}, context) do
+    :true = Eightysix.Coffee.on()
+    answer(context, "Turned coffee on :)")
   end
 end
