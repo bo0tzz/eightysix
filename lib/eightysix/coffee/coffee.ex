@@ -18,8 +18,13 @@ defmodule Eightysix.Coffee do
 
   def toggle(), do: turn("toggle")
   def on(), do: turn("on")
+  def on?(), do: get_path("/relay/0")
 
   def turn(state) do
-    Eightysix.Coffee.get!("/relay/0?turn=" <> state).body[:ison]
+    get_path("/relay/0?turn=" <> state)
+  end
+
+  def get_path(path) do
+    Eightysix.Coffee.get!(path).body[:ison]
   end
 end

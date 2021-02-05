@@ -49,7 +49,11 @@ defmodule Eightysix.Bot do
   end
 
   def handle({:regex, :lunch, _msg}, context) do
-    :true = Eightysix.Coffee.on()
-    answer(context, "Turned coffee on :)")
+    case Eightysix.Coffee.on?() do
+      :false -> :true = Eightysix.Coffee.on()
+                answer(context, "Turned coffee on :)")
+
+      _ -> :ok
+    end
   end
 end
