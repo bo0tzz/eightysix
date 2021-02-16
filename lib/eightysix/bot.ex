@@ -5,7 +5,7 @@ defmodule Eightysix.Bot do
     name: @bot,
     setup_commands: true
 
-  regex(~r/l(u|o)nch|dinner/i, :coffee_time)
+  regex(~r/l(u|o)+nch|di+nner/i, :coffee_time)
 
   command("add", description: "Add an item to the shopping list")
   command("coffee", description: "Turn the coffee machine on or off")
