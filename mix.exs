@@ -29,7 +29,8 @@ defmodule Eightysix.MixProject do
       {:hackney, "~> 1.12"},
       {:jason, ">= 1.0.0"},
       {:httpoison, ">= 1.6.0"},
-      {:poison, "~> 4.0"}
+      {:poison, "~> 4.0"},
+      {:timex, "~> 3.6"}
     ]
   end
 end
