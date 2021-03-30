@@ -24,7 +24,7 @@ defmodule Eightysix.MixProject do
     [
       {:quantum, "~> 3.0"},
       {:vapor, "~> 0.10"},
-      {:ex_gram, "~> 0.15"},
+      {:ex_gram, "~> 0.21"},
       {:tesla, "~> 1.2"},
       {:hackney, "~> 1.12"},
       {:jason, ">= 1.0.0"},
