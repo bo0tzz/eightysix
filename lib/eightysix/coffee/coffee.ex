@@ -49,7 +49,8 @@ defmodule Eightysix.Coffee do
   end
 
   def currently_between({start, endt}) do
-    today = Timex.to_datetime(Timex.today())
+    tz = Timex.Timezone.local()
+    today = Timex.to_datetime(Timex.today(tz), tz)
     now = Timex.local()
     s = Timex.add(today, Timex.Duration.from_time(start))
     e = Timex.add(today, Timex.Duration.from_time(endt))
