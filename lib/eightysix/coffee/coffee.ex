@@ -1,5 +1,6 @@
 defmodule Eightysix.Coffee do
   use HTTPoison.Base
+  require Logger
 
   @expected_fields ~w(
     ison has_timer timer_started timer_duration timer_remaining source
@@ -34,12 +35,16 @@ defmodule Eightysix.Coffee do
   end
 
   def coffee_time() do
+    Logger.debug("Deciding if it's time for coffee")
     case {Enum.any?(@coffee_times, &currently_between/1), Eightysix.Coffee.on?()} do
       {true, false} ->
+        Logger.info("It's time for coffee!")
         :true = Eightysix.Coffee.on()
         {:ok, "Turned coffee on :)"}
 
-      _ -> :ok
+      _ ->
+        Logger.info("It's not time for coffee")
+        :ok
     end
   end
 
